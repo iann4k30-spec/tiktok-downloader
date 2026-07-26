@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masuk — TikTok Downloader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="page-wrap">
+    <div class="auth card">
+      <div class="mark">♪</div>
+      <h1>Masuk</h1>
+      <p class="sub">Download video &amp; foto TikTok</p>
+
+      <form class="form" id="loginForm" novalidate>
+        <div class="field anim-stagger">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="nama@email.com" autocomplete="email" required />
+        </div>
+        <div class="field anim-stagger">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="password" autocomplete="current-password" required />
+        </div>
+
+        <div class="toast anim-stagger" id="toast" role="alert"></div>
+
+        <button type="submit" class="btn btn-primary anim-stagger" id="loginBtn">
+          <span class="label">Masuk</span>
+          <span class="loader"></span>
+        </button>
+      </form>
+
+      <p class="auth-footer">Belum punya akun? <a href="/register.html">Daftar</a></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

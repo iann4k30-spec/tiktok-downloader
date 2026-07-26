@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — TikTok Downloader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="top">
+    <span class="logo"><span>♪</span> td</span>
+    <span class="spacer"></span>
+    <span class="email" id="navEmail"></span>
+    <button class="btn btn-ghost" id="logoutBtn">KELUAR</button>
+  </div>
+
+  <div class="page-wrap">
+    <div id="limitBanner"></div>
+
+    <h1>Download</h1>
+    <p class="sub">Tempel link TikTok — video &amp; foto</p>
+
+    <div class="dl-wrap anim-stagger">
+      <div class="dl-row">
+        <input type="url" id="tiktokUrl" placeholder="https://www.tiktok.com/@user/video/1234567890" />
+        <button class="btn btn-primary" id="downloadBtn">
+          <span class="label">↓ Download</span>
+          <span class="loader"></span>
+        </button>
+      </div>
+      <hr class="rule" />
+      <div class="toast" id="toast" role="alert"></div>
+    </div>
+
+    <div class="result" id="resultCard">
+      <div class="result-preview" id="resultPreview">
+        <img id="resultCover" alt="" />
+        <div class="result-meta">
+          <div class="label" id="resultType">VIDEO</div>
+          <div class="author" id="resultAuthor"></div>
+          <div class="title" id="resultTitle"></div>
+          <div class="meta-row" id="resultMeta">durasi: <span id="durationText">--</span></div>
+        </div>
+      </div>
+      <div class="photo-grid" id="photoGrid"></div>
+      <div class="result-dl" id="resultDl">
+        <a class="primary-link" id="downloadNoWatermark">
+          ↓ Tanpa watermark
+        </a>
+        <a id="downloadWatermark">
+          ↓ Dengan watermark
+        </a>
+        <button id="downloadMusic">♪ Musik</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
