@@ -9,7 +9,6 @@
     "dev": "node --watch server.js"
   },
   "dependencies": {
-    "@sendgrid/mail": "^8.1.6",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
     "better-sqlite3": "^11.7.0",

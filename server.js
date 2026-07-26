@@ -1,7 +1,7 @@
 require('dotenv/config');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const sgMail = require('@sendgrid/mail');
+const nodemailer = require('nodemailer');
 const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto');
@@ -20,7 +20,15 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: parseInt(process.env.SMTP_PORT || '587'),
+  secure: process.env.SMTP_SECURE === 'true',
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
 const otpStore = new Map();
 const anonDl = new Map();
@@ -84,8 +92,8 @@ app.post('/api/register-send-otp', async (req, res) => {
     const hashed = await bcrypt.hash(password, 10);
     otpStore.set(email, { otp, hashed, expiresAt: Date.now() + 5 * 60 * 1000 });
 
-    await sgMail.send({
-      from: { email: process.env.SENDGRID_FROM, name: 'TikTok Downloader' },
+    await transporter.sendMail({
+      from: `"TikTok Downloader" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
       to: email,
       subject: 'Kode verifikasi akun TikTok Downloader',
       html: `
