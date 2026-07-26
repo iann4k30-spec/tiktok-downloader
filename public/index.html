@@ -3,39 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Masuk — TikTok Downloader</title>
+  <title>Save Ae — TikTok Downloader</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+  <div class="top">
+    <span class="logo">save<span>ae</span></span>
+    <span class="spacer"></span>
+  </div>
+
   <div class="page-wrap">
-    <div class="auth card">
-      <div class="mark">♪</div>
-      <h1>Masuk</h1>
-      <p class="sub">Download video &amp; foto TikTok</p>
+    <h1 class="hero-title">Save Ae <span class="stabilo">TikTok</span></h1>
+    <p class="sub">Tempel link, download video &amp; foto tanpa batas</p>
 
-      <form class="form" id="loginForm" novalidate>
-        <div class="field anim-stagger">
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="nama@email.com" autocomplete="email" required />
-        </div>
-        <div class="field anim-stagger">
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="password" autocomplete="current-password" required />
-        </div>
-
-        <div class="toast anim-stagger" id="toast" role="alert"></div>
-
-        <button type="submit" class="btn btn-primary anim-stagger" id="loginBtn">
-          <span class="label">Masuk</span>
+    <div class="dl-wrap anim-stagger">
+      <div class="dl-row">
+        <input type="url" id="tiktokUrl" placeholder="https://www.tiktok.com/@user/video/1234567890" />
+        <button class="btn btn-primary" id="downloadBtn">
+          <span class="label">↓ Download</span>
           <span class="loader"></span>
         </button>
-      </form>
+      </div>
+      <hr class="rule" />
+      <div class="toast" id="toast" role="alert"></div>
+    </div>
 
-      <p class="auth-footer">Belum punya akun? <a href="/register.html">Daftar</a></p>
+    <div class="result" id="resultCard">
+      <div class="result-preview" id="resultPreview">
+        <img id="resultCover" alt="" />
+        <div class="result-meta">
+          <div class="label" id="resultType">VIDEO</div>
+          <div class="author" id="resultAuthor"></div>
+          <div class="title" id="resultTitle"></div>
+          <div class="meta-row" id="resultMeta">durasi: <span id="durationText">--</span></div>
+        </div>
+      </div>
+      <div class="photo-grid" id="photoGrid"></div>
+      <div class="result-dl" id="resultDl">
+        <a class="primary-link" id="downloadNoWatermark">
+          ↓ Tanpa watermark
+        </a>
+        <a id="downloadWatermark">
+          ↓ Dengan watermark
+        </a>
+        <button id="downloadMusic">♪ Musik</button>
+      </div>
     </div>
   </div>
 
