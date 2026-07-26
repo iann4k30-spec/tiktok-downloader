@@ -1,7 +1,7 @@
 require('dotenv/config');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
 const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto');
@@ -20,13 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD,
-  },
-});
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const otpStore = new Map();
 const anonDl = new Map();
@@ -90,8 +84,8 @@ app.post('/api/register-send-otp', async (req, res) => {
     const hashed = await bcrypt.hash(password, 10);
     otpStore.set(email, { otp, hashed, expiresAt: Date.now() + 5 * 60 * 1000 });
 
-    await transporter.sendMail({
-      from: `"TikTok Downloader" <${process.env.GMAIL_USER}>`,
+    await sgMail.send({
+      from: { email: process.env.SENDGRID_FROM, name: 'TikTok Downloader' },
       to: email,
       subject: 'Kode verifikasi akun TikTok Downloader',
       html: `
@@ -130,7 +124,7 @@ app.post('/api/register-send-otp', async (req, res) => {
     res.json({ success: true, message: 'Kode OTP telah dikirim ke email Anda' });
   } catch (err) {
     console.error('Send OTP error:', err);
-    res.status(500).json({ success: false, message: 'Gagal kirim OTP. Periksa konfigurasi email.' });
+    res.status(500).json({ success: false, message: 'Gagal kirim OTP. Coba lagi nanti.' });
   }
 });
 
